@@ -1,0 +1,56 @@
+﻿<Window x:Class="POE_Final_GUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:POE_Final_GUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15*"/>
+            <RowDefinition Height="419*"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="Tabs" Visibility="Visible" Grid.RowSpan="2" SelectionChanged="Tabs_SelectionChanged">
+            <TabItem x:Name="firstExpenses" Header="firstExpenses" Visibility="Visible" Opacity="0" IsEnabled="False">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="btnFeNext" Content="Next" HorizontalAlignment="Left" Margin="723,318,0,0" VerticalAlignment="Top" Width="45" Click="btnSeNex_Click_1"/>
+                    <Label x:Name="lblGrossIn" Content="Gross monthly income before tax:" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtbxGrossIn" HorizontalAlignment="Left" Margin="206,18,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtbxGrossIn_TextChanged"/>
+                    <Label x:Name="lblTax" Content="Monthly tax deducted:&#xD;&#xA;" HorizontalAlignment="Left" Margin="69,43,0,0" VerticalAlignment="Top" Height="23"/>
+                    <TextBox x:Name="txtbxTax" HorizontalAlignment="Left" Margin="206,46,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lblGroceries" Content="Groceries:" HorizontalAlignment="Left" Margin="136,69,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.472,0.891"/>
+                    <TextBox x:Name="txtbxGroceries" HorizontalAlignment="Left" Margin="206,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lblWaterLights" Content="Water and Lights:" HorizontalAlignment="Left" Margin="96,91,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
+                    <TextBox x:Name="txtbxWaterLights" HorizontalAlignment="Left" Margin="206,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="lblTravel" Content="Travel Costs (incl. petrol):" HorizontalAlignment="Left" Margin="57,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
+                    <Label x:Name="lblPhone" Content="Cellphone and Telephone:" HorizontalAlignment="Left" Margin="57,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
+                    <Label x:Name="lblOther" Content="Other expenses:" HorizontalAlignment="Left" Margin="110,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
+                    <TextBox x:Name="txtbxTravel" HorizontalAlignment="Left" Margin="206,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtbxPhone" HorizontalAlignment="Left" Margin="206,157,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtbxOther" HorizontalAlignment="Left" Margin="206,188,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="secondExpenses" Header="secondExpenses" Opacity="0">
+                <Grid Background="#FFE5E5E5">
+                    <Button x:Name="btnSeNext" Content="Next" HorizontalAlignment="Left" Margin="732,318,0,0" VerticalAlignment="Top" Width="45" Click="btnSeNex_Click_1"/>
+                    <Button x:Name="btnSeBack" Content="Back" HorizontalAlignment="Left" Margin="688,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1"/>
+                    <Label Content="2" HorizontalAlignment="Left" Margin="160,141,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem x:Name="thirdExpenses" HorizontalAlignment="Center" Height="20" Header="thirdExpenses" VerticalAlignment="Top" Width="90" Margin="0,-1,0,0" Opacity="0">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="137*"/>
+                        <ColumnDefinition Width="33*"/>
+                        <ColumnDefinition Width="624*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnTeNext" Content="Next" HorizontalAlignment="Left" Margin="561,318,0,0" VerticalAlignment="Top" Width="45" Click="btnSeNex_Click_1" RenderTransformOrigin="0.617,0.433" Grid.Column="2"/>
+                    <Button x:Name="btnTeBack" Content="Back" HorizontalAlignment="Left" Margin="517,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1" Grid.Column="2"/>
+                    <Label Content="3" HorizontalAlignment="Left" Margin="123,184,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+    </Grid>
+</Window>
