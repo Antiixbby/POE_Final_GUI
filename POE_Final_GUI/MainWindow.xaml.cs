@@ -27,10 +27,6 @@ namespace POE_Final_GUI
             this.Title = "Monthly Budget Calculator";
         }
 
-        private void btnFeNext_Click(object sender, RoutedEventArgs e)
-        {
-            nextTab();
-        }
 
         private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -63,9 +59,12 @@ namespace POE_Final_GUI
             prevTab();
         }
 
-        private void btnSeNex_Click_1(object sender, RoutedEventArgs e)
+        private void btnFeNextClick(object sender, RoutedEventArgs e)
         {
-            nextTab();
+            if (validateBasics(GetBasics())) 
+            {
+                nextTab();
+            }
         }
 
         private void txtbxGrossIn_TextChanged(object sender, TextChangedEventArgs e)
@@ -85,6 +84,22 @@ namespace POE_Final_GUI
             list.Add(txtbxPhone.Text);
             list.Add(txtbxOther.Text);
             return list;
+        }
+
+        //Validates the types for all values entered for income, tax and basic expenses like groceries
+        private bool validateBasics(ArrayList list) 
+        {
+            foreach (TextBox t in gridFeTxtbxs.Children)
+            {
+                try { double x = double.Parse(t.Text); }
+                catch (FormatException format) { t.Text = "Enter a valid value"; return false; }
+            }
+            return true;
+        }
+
+        private void txtbxOther_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }
