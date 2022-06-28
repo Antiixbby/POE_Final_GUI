@@ -24,6 +24,7 @@ namespace POE_Final_GUI
         //--------------------------------------------------------------------
         List<Expense> currentExpenses = new List<Expense>();
         string[] expenseNames = { "Estimated Monthly Tax Deducted", "Groceries", "Water and Lights", "Travel cost (Including petrol)", "Cellphone and Telephone", "Other expenses" };
+        double grossIn = 0;
         //--------------------------------------------------------------------
 
         public MainWindow()
@@ -74,6 +75,8 @@ namespace POE_Final_GUI
             ArrayList basics = GetBasics();
             if (validateBasics(basics))
             {
+                //Updates the gross income variable after validation
+                grossIn = Convert.ToDouble(txtbxGrossIn.Text);
                 //Create new expense list
                 List<Expense> basicExpenses = new List<Expense>();
                 //Create the new double array
@@ -84,8 +87,15 @@ namespace POE_Final_GUI
                 for(int i = 0; i < expenseNames.Length; i++) { basicExpenses.Add(new Expense(expenseNames[i], userDoubles[i])); }
                 //Add that new Expense list to our current expense list
                 currentExpenses.AddRange(basicExpenses);
-                lstCurrentExpenses.ItemsSource = currentExpenses;
-                nextTab();
+                //Checks if the user wants to buy a house or rent a house
+                if () { }
+                
+                /*if (MessageBox.Show("Would you like to buy a ",
+                    "Buy Car?",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question) == MessageBoxResult.Yes) { }
+                    nextTab();
+                */
             }
         }
 
@@ -107,6 +117,8 @@ namespace POE_Final_GUI
         //Validates the types for all values entered for income, tax and basic expenses like groceries
         private bool validateBasics(ArrayList list) 
         {
+            try { double z = double.Parse(txtbxGrossIn.Text); txtbxGrossIn.Background = Brushes.White; }
+            catch (Exception e) { Console.WriteLine(e); txtbxGrossIn.Text = "Enter a valid value" ; txtbxGrossIn.Background = Brushes.Red; return false; }
             foreach (TextBox t in gridFeTxtbxs.Children)
             {
                 try { double x = double.Parse(t.Text); t.Background = Brushes.White; }

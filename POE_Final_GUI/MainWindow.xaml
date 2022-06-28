@@ -23,7 +23,6 @@
                     <Label x:Name="lblPhone" Content="Cellphone and Telephone:" HorizontalAlignment="Left" Margin="57,153,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
                     <Label x:Name="lblOther" Content="Other expenses:" HorizontalAlignment="Left" Margin="110,184,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.582,0.448"/>
                     <Grid x:Name="gridFeTxtbxs" HorizontalAlignment="Left" Height="188" Margin="206,18,0,0" VerticalAlignment="Top">
-                        <TextBox x:Name="txtbxGrossIn" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtbxGrossIn_TextChanged"/>
                         <TextBox x:Name="txtbxTax" HorizontalAlignment="Left" Margin="0,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxGroceries" HorizontalAlignment="Left" Margin="0,55,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxWaterLights" HorizontalAlignment="Left" Margin="0,81,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
@@ -31,13 +30,15 @@
                         <TextBox x:Name="txtbxPhone" HorizontalAlignment="Left" Margin="0,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxOther" HorizontalAlignment="Left" Margin="0,170,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     </Grid>
+                    <TextBox x:Name="txtbxGrossIn" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" TextChanged="txtbxGrossIn_TextChanged" Margin="206,22,0,0"/>
+                    <RadioButton Content="Rent a home" GroupName ="Housing" HorizontalAlignment="Left" Margin="206,215,0,0" VerticalAlignment="Top" Width="120"/>
+                    <RadioButton Content="Buy a home" GroupName ="Housing" HorizontalAlignment="Left" Margin="206,235,0,0" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="secondExpenses" Header="secondExpenses" Opacity="0" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="btnSeNext" Content="Next" HorizontalAlignment="Left" Margin="732,318,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
                     <Button x:Name="btnSeBack" Content="Back" HorizontalAlignment="Left" Margin="688,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1"/>
-                    <ListBox x:Name="lstCurrentExpenses" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,481,95"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="thirdExpenses" HorizontalAlignment="Center" Height="20" Header="thirdExpenses" VerticalAlignment="Top" Width="90" Margin="0,-1,0,0" Opacity="0" IsEnabled="False">
