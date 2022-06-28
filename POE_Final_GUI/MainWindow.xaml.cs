@@ -21,12 +21,18 @@ namespace POE_Final_GUI
     /// </summary>
     public partial class MainWindow : Window
     {
+        //--------------------------------------------------------------------
+        List<Expense> currentExpenses = new List<Expense>();
+        string[] expenseNames = { "Estimated Monthly Tax Deducted", "Groceries", "Water and Lights", "Travel cost (Including petrol)", "Cellphone and Telephone", "Other expenses" };
+        //--------------------------------------------------------------------
+
         public MainWindow()
         {
             InitializeComponent();
+            
+
             this.Title = "Monthly Budget Calculator";
         }
-
 
         private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -56,13 +62,29 @@ namespace POE_Final_GUI
 
         private void btnSeBack_Click_1(object sender, RoutedEventArgs e)
         {
+            currentExpenses.Clear();
             prevTab();
         }
 
+        //The 'Next' button on the first page of the app
+        //This method is responsible for 
         private void btnFeNextClick(object sender, RoutedEventArgs e)
         {
-            if (validateBasics(GetBasics())) 
+            //If the values the user has entered are valid
+            ArrayList basics = GetBasics();
+            if (validateBasics(basics))
             {
+                //Create new expense list
+                List<Expense> basicExpenses = new List<Expense>();
+                //Create the new double array
+                double[] userDoubles = new double[basics.Count];
+                //Convert our arraylist to doubles and fill our double array
+                for (int i = 0; i < basics.Count; i++) { userDoubles[i] = Convert.ToDouble(basics[i]); }
+                //Fill our expense array with new objects from the userDoubles and expenseNames arrays
+                for(int i = 0; i < expenseNames.Length; i++) { basicExpenses.Add(new Expense(expenseNames[i], userDoubles[i])); }
+                //Add that new Expense list to our current expense list
+                currentExpenses.AddRange(basicExpenses);
+                lstCurrentExpenses.ItemsSource = currentExpenses;
                 nextTab();
             }
         }
@@ -72,17 +94,13 @@ namespace POE_Final_GUI
 
         }
 
+        //--------------------------------------------------------------------------------------
+
         //Returns an array list of all values entered for basic expenses
         public ArrayList GetBasics() 
         {
             ArrayList list = new ArrayList();
-            list.Add(txtbxGrossIn.Text);
-            list.Add(txtbxTax.Text);
-            list.Add(txtbxGroceries.Text);
-            list.Add(txtbxWaterLights.Text);
-            list.Add(txtbxTravel.Text);
-            list.Add(txtbxPhone.Text);
-            list.Add(txtbxOther.Text);
+            foreach (TextBox t in gridFeTxtbxs.Children) {list.Add(t.Text);}
             return list;
         }
 
@@ -91,8 +109,8 @@ namespace POE_Final_GUI
         {
             foreach (TextBox t in gridFeTxtbxs.Children)
             {
-                try { double x = double.Parse(t.Text); }
-                catch (FormatException format) { t.Text = "Enter a valid value"; return false; }
+                try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
+                catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
             }
             return true;
         }

@@ -37,7 +37,7 @@
                 <Grid Background="#FFE5E5E5">
                     <Button x:Name="btnSeNext" Content="Next" HorizontalAlignment="Left" Margin="732,318,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
                     <Button x:Name="btnSeBack" Content="Back" HorizontalAlignment="Left" Margin="688,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1"/>
-                    <Label Content="2" HorizontalAlignment="Left" Margin="160,141,0,0" VerticalAlignment="Top"/>
+                    <ListBox x:Name="lstCurrentExpenses" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,481,95"/>
                 </Grid>
             </TabItem>
             <TabItem x:Name="thirdExpenses" HorizontalAlignment="Center" Height="20" Header="thirdExpenses" VerticalAlignment="Top" Width="90" Margin="0,-1,0,0" Opacity="0" IsEnabled="False">
