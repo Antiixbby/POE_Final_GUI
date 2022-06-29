@@ -73,7 +73,7 @@ namespace POE_Final_GUI
         {
             //If the values the user has entered are valid
             ArrayList basics = GetBasics();
-            if (validateBasics(basics))
+            if (validateInput(basics))
             {
                 //Updates the gross income variable after validation
                 grossIn = Convert.ToDouble(txtbxGrossIn.Text);
@@ -88,7 +88,7 @@ namespace POE_Final_GUI
                 //Add that new Expense list to our current expense list
                 currentExpenses.AddRange(basicExpenses);
                 //Checks if the user wants to buy a house or rent a house
-                if () { }
+                
                 
                 /*if (MessageBox.Show("Would you like to buy a ",
                     "Buy Car?",
@@ -110,17 +110,20 @@ namespace POE_Final_GUI
         public ArrayList GetBasics() 
         {
             ArrayList list = new ArrayList();
-            foreach (TextBox t in gridFeTxtbxs.Children) {list.Add(t.Text);}
+            foreach (TextBox t in basicExpensestxtbxgrp.Children) {list.Add(t.Text);}
             return list;
         }
 
         //Validates the types for all values entered for income, tax and basic expenses like groceries
-        private bool validateBasics(ArrayList list) 
+        private bool validateInput(ArrayList list) 
         {
+            //Validation for just for the gross in
             try { double z = double.Parse(txtbxGrossIn.Text); txtbxGrossIn.Background = Brushes.White; }
             catch (Exception e) { Console.WriteLine(e); txtbxGrossIn.Text = "Enter a valid value" ; txtbxGrossIn.Background = Brushes.Red; return false; }
-            foreach (TextBox t in gridFeTxtbxs.Children)
-            {
+            
+            //Different textboxes are grouped into grids depending on their function, we then iterate through the children of these grids for validation
+            //Validation for basic expenses such as 
+            foreach (TextBox t in basicExpensestxtbxgrp.Children){
                 try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
                 catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
             }
@@ -130,6 +133,19 @@ namespace POE_Final_GUI
         private void txtbxOther_TextChanged(object sender, TextChangedEventArgs e)
         {
 
+        }
+
+        private void rbtnRent_Checked(object sender, RoutedEventArgs e)
+        {
+            txtbxRent.IsEnabled = true;
+            txtbxPurchasePrice.IsEnabled = false;
+        }
+
+        //Shows the rental relevant textboxes and hides the home loan relevant ones
+        private void rbtnBuy_Checked(object sender, RoutedEventArgs e)
+        {
+            txtbxRent.IsEnabled = false;
+            txtbxPurchasePrice.IsEnabled = true;
         }
     }
 }
