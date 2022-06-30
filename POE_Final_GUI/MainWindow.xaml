@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:POE_Final_GUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="479" Width="800">
+        Title="MainWindow" Height="479" Width="734">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="15*"/>
@@ -14,7 +14,7 @@
         <TabControl x:Name="Tabs" Visibility="Visible" Grid.RowSpan="2" SelectionChanged="Tabs_SelectionChanged">
             <TabItem x:Name="firstExpenses" Header="firstExpenses" Visibility="Visible" Opacity="0" IsEnabled="False">
                 <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="797">
-                    <Button x:Name="btnFeNext" Content="Next" HorizontalAlignment="Left" Margin="684,390,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
+                    <Button x:Name="btnFeNext" Content="Next" HorizontalAlignment="Left" Margin="660,371,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
                     <Label x:Name="lblGrossIn" Content="Gross monthly income before tax:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblTax" Content="Monthly tax deducted:&#xD;&#xA;" HorizontalAlignment="Left" Margin="69,70,0,0" VerticalAlignment="Top" Height="23"/>
                     <Label x:Name="lblGroceries" Content="Groceries:" HorizontalAlignment="Left" Margin="136,96,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.472,0.891"/>
@@ -44,7 +44,7 @@
                         <TextBox x:Name="txtbxInterestRate" HorizontalAlignment="Center" Margin="0,73,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False" RenderTransformOrigin="0.645,0.384"/>
                         <TextBox x:Name="txtbxMonths" HorizontalAlignment="Center" Margin="0,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     </Grid>
-                    <TextBox x:Name="txtbxRent" HorizontalAlignment="Left" Margin="524,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+                    <TextBox x:Name="txtbxRent" HorizontalAlignment="Left" Margin="529,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     <CheckBox x:Name="chkbxBuyCar" Content="Purchase motor vehicle" HorizontalAlignment="Left" Margin="273,272,0,0" VerticalAlignment="Top" Checked="chkbxBuyCar_Checked" Unchecked="chkbxBuyCar_Checked"/>
                     <Grid x:Name="buyCarGrid" HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="496" Margin="69,303,0,0">
                         <Label x:Name="lblModelMake" Content="Model and Make:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,0,0,0"/>

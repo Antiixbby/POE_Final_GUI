@@ -71,32 +71,32 @@ namespace POE_Final_GUI
         //This method is responsible for 
         private void btnFeNextClick(object sender, RoutedEventArgs e)
         {
-            //If the values the user has entered are valid
-            ArrayList basics = GetBasics();
-            if (validateInput(basics))
-            {
-                //Updates the gross income variable after validation
-                grossIn = Convert.ToDouble(txtbxGrossIn.Text);
-                //Create new expense list
-                List<Expense> basicExpenses = new List<Expense>();
-                //Create the new double array
-                double[] userDoubles = new double[basics.Count];
-                //Convert our arraylist to doubles and fill our double array
-                for (int i = 0; i < basics.Count; i++) { userDoubles[i] = Convert.ToDouble(basics[i]); }
-                //Fill our expense array with new objects from the userDoubles and expenseNames arrays
-                for(int i = 0; i < expenseNames.Length; i++) { basicExpenses.Add(new Expense(expenseNames[i], userDoubles[i])); }
-                //Add that new Expense list to our current expense list
-                currentExpenses.AddRange(basicExpenses);
-                //Checks if the user wants to buy a house or rent a house
-                
-                
-                /*if (MessageBox.Show("Would you like to buy a ",
-                    "Buy Car?",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Question) == MessageBoxResult.Yes) { }
-                    nextTab();
-                */
-            }
+            
+        }
+
+        //Runs all validations in order and returns true if all are valid
+        bool allValid() 
+        {
+            bool valid = true;
+            //Validating buttons
+            if (!validateButtons()) { valid = false; }
+            //Validating basics
+            //if () { }
+            //Validating housing
+            //if () { }
+            //Validating car
+            //if(){}
+            return valid;
+        }
+
+        //Validates all values for basic expenses such as 
+
+        //Validates that the user has made valid selections and the app can continue
+        private bool validateButtons() 
+        {
+            //If the user has not selected buy or rent
+            if (rbtnBuy.IsChecked == false && rbtnRent.IsChecked == false) { MessageBox.Show("Please select either Buying or Renting"); return false; }
+            return true;
         }
 
         private void txtbxGrossIn_TextChanged(object sender, TextChangedEventArgs e)
