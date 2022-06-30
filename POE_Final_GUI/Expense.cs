@@ -29,7 +29,7 @@ namespace POE_Final_GUI
             this.cost = cost;
         }
 
-        public string getName() 
+        public string GetName() 
         {
             return this.name;
         }

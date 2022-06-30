@@ -61,19 +61,19 @@ namespace POE_Final_GUI
         {
             bool valid = true;
             //Validating buttons
-            if (!validateButtons()) { valid = false; }
+            if (!ValidateButtons()) { valid = false; }
             //Validating basics
-            if (!validateBasics()) { valid = false; }
+            if (!ValidateBasics()) { valid = false; }
             //Validating housing
-            if (!validateHousing()) { valid = false; }
+            if (!ValidateHousing()) { valid = false; }
             //Validating car
-            if (!validateCar()) { valid = false; }
+            if (!ValidateCar()) { valid = false; }
             return valid;
         }
 
 
         //Validates that the user has made valid selections and the app can continue
-        private bool validateButtons() 
+        private bool ValidateButtons() 
         {
             //If the user has not selected buy or rent
             if (rbtnBuy.IsChecked == false && rbtnRent.IsChecked == false) { MessageBox.Show("Please select either Buying or Renting"); return false; }
@@ -81,7 +81,7 @@ namespace POE_Final_GUI
         }
 
         //Validates the types for all values entered for income, tax and basic expenses like groceries
-        private bool validateBasics()
+        private bool ValidateBasics()
         {
             //Validation for just for the gross in
             try { double z = double.Parse(txtbxGrossIn.Text); txtbxGrossIn.Background = Brushes.White; }
@@ -97,7 +97,7 @@ namespace POE_Final_GUI
             return true;
         }
         //Validates user input for housing info
-        private bool validateHousing()
+        private bool ValidateHousing()
         {
             if (rbtnBuy.IsChecked == true)
             {
@@ -126,7 +126,7 @@ namespace POE_Final_GUI
             }
         }
         //Validates user input for car
-        private bool validateCar()
+        private bool ValidateCar()
         {
             if (chkbxBuyCar.IsChecked == true) {
                 foreach (TextBox t in buyCarGrid.Children.OfType<TextBox>())
@@ -143,7 +143,7 @@ namespace POE_Final_GUI
         }
 
         //validates the savings info
-        private bool validateSavings()
+        private bool ValidateSavings()
         {
             bool valid = true;
             //Savings amount
@@ -181,7 +181,7 @@ namespace POE_Final_GUI
         }
 
         //Returns a homeloan expense from user data
-        private Expense getHousing() 
+        private Expense GetHousing() 
         {
             if (rbtnBuy.IsChecked == true)
             {
@@ -200,7 +200,7 @@ namespace POE_Final_GUI
         }
 
         //Returns an expense list for car
-        private Car getCar() 
+        private Car GetCar() 
         {
             return new Car(
                 txtbxModelMake.Text,
@@ -254,9 +254,9 @@ namespace POE_Final_GUI
                 
                 //Adding expenses to our list
                 currentExpenses.AddRange(GetBasics());
-                currentExpenses.Add(getHousing());
+                currentExpenses.Add(GetHousing());
                 //Only add the car expense if the user has chosen to
-                if (chkbxBuyCar.IsChecked==true) { currentExpenses.Add(getCar()); }
+                if (chkbxBuyCar.IsChecked==true) { currentExpenses.Add(GetCar()); }
 
                 //Checking if all expenses exceed 75% of income
                 ExpenseCheck();
@@ -304,7 +304,7 @@ namespace POE_Final_GUI
 
         private void btnCalcSavings_Click(object sender, RoutedEventArgs e)
         {
-            if (validateSavings()) 
+            if (ValidateSavings()) 
             {
                 //Number of months to save
                 double savingAmount = Convert.ToDouble(txtbxSaveAmount.Text);
