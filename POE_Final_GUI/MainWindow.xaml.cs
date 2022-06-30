@@ -97,7 +97,7 @@ namespace POE_Final_GUI
             return true;
         }
         //Validates user input for housing info
-        private bool validateHousing() 
+        private bool validateHousing()
         {
             if (rbtnBuy.IsChecked == true)
             {
@@ -106,6 +106,15 @@ namespace POE_Final_GUI
                     try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
                     catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
                 }
+                //By this point we know its a double
+                //Checking housing interest rate
+                if (Convert.ToDouble(txtbxInterestRate.Text) > 100 || Convert.ToDouble(txtbxInterestRate.Text) < 0)
+                { txtbxInterestRate.Text = "Enter a valid value between 0 and 100"; txtbxInterestRate.Background = Brushes.Red; return false; }
+                else { txtbxInterestRate.Background = Brushes.White; }
+                //Checking housing months
+                if (Convert.ToDouble(txtbxMonths.Text) > 360 || Convert.ToDouble(txtbxMonths.Text) < 240)
+                { txtbxMonths.Text = "Enter a valid value between 240 and 360"; txtbxMonths.Background = Brushes.Red; return false; }
+                else { txtbxMonths.Background = Brushes.White; }
                 return true;
             }
             //If not buying must be renting as we have validated that at least one button is checked
@@ -260,7 +269,9 @@ namespace POE_Final_GUI
             lstbxExpenses.ItemsSource=null;
             //Clears the current expense list
             currentExpenses.Clear();
+            btnCalcSavings.IsEnabled = true;
             Tabs.SelectedIndex--;
+
         }
 
         private void chkbxSaveUp_Checked(object sender, RoutedEventArgs e)
@@ -281,17 +292,12 @@ namespace POE_Final_GUI
                 //Calculation
                 double ans = Math.Floor((savingAmount * (rate / months)) / (Math.Pow((1 + (rate / months)), months * years) - 1));
                 txtbxReqSavings.Text = ans+"";
-                //Removing it from the list if its already there
                 Expense savings = new Expense("Monthly Savings", ans);
-                foreach (Expense searchExpense in currentExpenses) {
-                    if (searchExpense.getName() == "Monthly ") 
-                    {
-                        currentExpenses.Remove(searchExpense);
-                    }    
-                }
                 //Adding it to our expenses
                 currentExpenses.Add(savings);
                 lstbxExpenses.ItemsSource = currentExpenses.OrderByDescending(x => x.GetCost()).ToList();
+                btnCalcSavings.IsEnabled = false;
+                txtbxMonthlyMoney.Text = calc.CalculateMonthlyMoneyLeftover(grossIn, currentExpenses) + "";
             }
         }
 
