@@ -67,6 +67,15 @@
                     <Label x:Name="lblYourExpenses" Content="Your expenses:" HorizontalAlignment="Left" Margin="125,0,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="lblMonthlyLeftover" Content="Monthly money leftover:" HorizontalAlignment="Left" Margin="24,270,0,0" VerticalAlignment="Top"/>
                     <TextBox x:Name="txtbxMonthlyMoney" HorizontalAlignment="Left" Margin="169,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <CheckBox x:Name="chkbxSaveUp" Content="Save a certain amount of money?" HorizontalAlignment="Left" Margin="423,36,0,0" VerticalAlignment="Top" Checked="chkbxSaveUp_Checked" Unchecked="chkbxSaveUp_Checked"/>
+                    <Label x:Name="lblSaveAmount" Content="Amount to save:" HorizontalAlignment="Left" Margin="391,70,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblDate" Content="Date (YYYY-MM-DD):" HorizontalAlignment="Left" Margin="365,122,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.364,0.568"/>
+                    <Label x:Name="lblInterestRate" Content="Interest rate (0.0-100):" HorizontalAlignment="Left" Margin="361,150,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.364,0.568"/>
+                    <Label x:Name="lblSaveReason" Content="Reason for saving:" HorizontalAlignment="Left" Margin="381,96,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtbxSaveAmount" HorizontalAlignment="Left" Margin="499,74,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txt" HorizontalAlignment="Left" Margin="499,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtbxSaveAmount_Copy1" HorizontalAlignment="Left" Margin="499,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="txtbxSaveAmount_Copy2" HorizontalAlignment="Left" Margin="499,154,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
         </TabControl>
