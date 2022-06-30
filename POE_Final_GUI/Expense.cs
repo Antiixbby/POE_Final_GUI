@@ -9,19 +9,30 @@ namespace POE_Final_GUI
     internal class Expense
     {
         string name { get; set; }
-        double price { get; set; }
+        double cost { get; set; }
 
         public Expense() { }
 
         public Expense(string newName, double newPrice) 
         {
             this.name = newName;
-            this.price = newPrice;
+            this.cost = newPrice;
         }
+
+        public double GetCost()
+        {
+            return this.cost;
+        }
+
+        public void SetCost(double cost)
+        {
+            this.cost = cost;
+        }
+
 
         public override string ToString()
         {
-            return "Name: "+this.name+" Price: R"+this.price;
+            return "Name: "+this.name+" Price: R"+this.cost;
         }
     }
 }

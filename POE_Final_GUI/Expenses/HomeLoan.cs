@@ -8,5 +8,6 @@ namespace POE_Final_GUI.Expenses
 {
     internal class HomeLoan
     {
+
     }
 }

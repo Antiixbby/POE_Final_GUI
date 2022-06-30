@@ -30,8 +30,8 @@ namespace POE_Final_GUI
         public MainWindow()
         {
             InitializeComponent();
-            
-
+            //Custom setup for gui
+            buyCarGrid.Visibility = Visibility.Hidden;
             this.Title = "Monthly Budget Calculator";
         }
 
@@ -138,14 +138,22 @@ namespace POE_Final_GUI
         private void rbtnRent_Checked(object sender, RoutedEventArgs e)
         {
             txtbxRent.IsEnabled = true;
-            txtbxPurchasePrice.IsEnabled = false;
+            foreach (TextBox t in homeloanGrid.Children) { t.IsEnabled = false; }
         }
 
         //Shows the rental relevant textboxes and hides the home loan relevant ones
         private void rbtnBuy_Checked(object sender, RoutedEventArgs e)
         {
             txtbxRent.IsEnabled = false;
-            txtbxPurchasePrice.IsEnabled = true;
+            foreach (TextBox t in homeloanGrid.Children) { t.IsEnabled = true; }
         }
+
+        private void chkbxBuyCar_Checked(object sender, RoutedEventArgs e)
+        {
+            if (chkbxBuyCar.IsChecked == false) { buyCarGrid.Visibility = Visibility.Hidden; }
+            else { buyCarGrid.Visibility = Visibility.Visible; }
+        }
+
+        private void toggleBuyCar(bool toggle) {  }
     }
 }
