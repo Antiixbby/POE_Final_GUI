@@ -33,6 +33,7 @@ namespace POE_Final_GUI
             InitializeComponent();
             //Custom setup for gui
             buyCarGrid.Visibility = Visibility.Hidden;
+            savingsGrid.Visibility = Visibility.Hidden;
             this.Title = "Monthly Budget Calculator";
         }
 
@@ -262,7 +263,8 @@ namespace POE_Final_GUI
 
         private void chkbxSaveUp_Checked(object sender, RoutedEventArgs e)
         {
-
+            if (chkbxSaveUp.IsChecked == false) { savingsGrid.Visibility = Visibility.Hidden;}
+            else { savingsGrid.Visibility = Visibility.Visible; }
         }
     }
 }
