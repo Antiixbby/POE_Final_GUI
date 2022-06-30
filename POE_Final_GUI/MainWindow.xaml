@@ -77,7 +77,7 @@
                         <TextBox x:Name="txt" HorizontalAlignment="Left" Margin="154,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxSaveAmount_Copy1" HorizontalAlignment="Left" Margin="154,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxSaveAmount_Copy2" HorizontalAlignment="Left" Margin="154,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                        <Button x:Name="btnCalcSavings" Content="Calculate required monthly savings" HorizontalAlignment="Left" Margin="119,123,0,0" VerticalAlignment="Top"/>
+                        <Button x:Name="btnCalcSavings" Content="Calculate required monthly savings" HorizontalAlignment="Left" Margin="119,123,0,0" VerticalAlignment="Top" Click="btnCalcSavings_Click"/>
                         <Label x:Name="lblSavingsAns" Content="Required monthly savings:" HorizontalAlignment="Left" Margin="0,155,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtbxReqSavings" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     </Grid>

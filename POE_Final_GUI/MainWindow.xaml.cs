@@ -266,5 +266,27 @@ namespace POE_Final_GUI
             if (chkbxSaveUp.IsChecked == false) { savingsGrid.Visibility = Visibility.Hidden;}
             else { savingsGrid.Visibility = Visibility.Visible; }
         }
+
+        private void btnCalcSavings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //validates the savings info
+        private bool validateSavings() 
+        {
+            bool valid = true;
+            //Savings amount
+            double savingsAmt;
+            if (double.TryParse(txtbxSaveAmount.Text, out savingsAmt)) { txtbxSaveAmount.Background = Brushes.White; }
+            else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
+            //Date
+            double amt;
+            if (double.TryParse(txtbxSaveAmount.Text, out amt)) { txtbxSaveAmount.Background = Brushes.White; }
+            else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
+            //Interest rate
+
+            return valid;
+        }
     }
 }
