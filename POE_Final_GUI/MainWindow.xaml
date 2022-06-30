@@ -12,7 +12,7 @@
             <RowDefinition Height="419*"/>
         </Grid.RowDefinitions>
         <TabControl x:Name="Tabs" Visibility="Visible" Grid.RowSpan="2" SelectionChanged="Tabs_SelectionChanged">
-            <TabItem x:Name="firstExpenses" Header="firstExpenses" Visibility="Visible" Opacity="0" IsEnabled="False">
+            <TabItem x:Name="expenses" Header="firstExpenses" Visibility="Visible" Opacity="0" IsEnabled="False">
                 <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="730">
                     <Button x:Name="btnFeNext" Content="Next" HorizontalAlignment="Left" Margin="660,371,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
                     <Label x:Name="lblGrossIn" Content="Gross monthly income before tax:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
@@ -46,13 +46,13 @@
                     </Grid>
                     <TextBox x:Name="txtbxRent" HorizontalAlignment="Left" Margin="529,225,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
                     <CheckBox x:Name="chkbxBuyCar" Content="Purchase motor vehicle" HorizontalAlignment="Left" Margin="273,272,0,0" VerticalAlignment="Top" Checked="chkbxBuyCar_Checked" Unchecked="chkbxBuyCar_Checked"/>
+                    <TextBox x:Name="txtbxModelMake" HorizontalAlignment="Left" Margin="187,303,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Visibility="Hidden"/>
                     <Grid x:Name="buyCarGrid" HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="496" Margin="69,303,0,0">
-                        <Label x:Name="lblModelMake" Content="Model and Make:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,0,0,0"/>
+                        <Label x:Name="lblModelMake" Content="Model and Make:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="14,-5,0,0"/>
                         <Label x:Name="lblCarPrice" Content="Purchase Price:" HorizontalAlignment="Left" Margin="27,0,0,0" VerticalAlignment="Center"/>
                         <Label x:Name="lblCarDeposit" Content="Total Deposit:" HorizontalAlignment="Left" Margin="34,62,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.632,0.578"/>
-                        <Label x:Name="lblCarInterest" Content="Interest Rate:" HorizontalAlignment="Left" Margin="291,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.632,0.578"/>
+                        <Label x:Name="lblCarInterest" Content="Interest Rate (0.0-100):" HorizontalAlignment="Left" Margin="248,0,0,0" VerticalAlignment="Center" RenderTransformOrigin="0.632,0.578"/>
                         <Label x:Name="lblCarInsurance" Content="Insurance premium:" HorizontalAlignment="Left" Margin="256,0,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.689,0.174"/>
-                        <TextBox x:Name="txtbxModelMake" HorizontalAlignment="Left" Margin="121,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxCarPrice" HorizontalAlignment="Left" Margin="121,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
                         <TextBox x:Name="txtbxCarDeposit" HorizontalAlignment="Left" Margin="121,66,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <TextBox x:Name="txtbxCarRate" HorizontalAlignment="Left" Margin="376,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="120"/>
@@ -60,26 +60,16 @@
                     </Grid>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="secondExpenses" Header="secondExpenses" Opacity="0" IsEnabled="False">
+            <TabItem x:Name="summary" Header="secondExpenses" Opacity="0" IsEnabled="False">
                 <Grid Background="#FFE5E5E5">
-                    <Button x:Name="btnSeNext" Content="Next" HorizontalAlignment="Left" Margin="732,318,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick"/>
-                    <Button x:Name="btnSeBack" Content="Back" HorizontalAlignment="Left" Margin="688,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1"/>
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="thirdExpenses" HorizontalAlignment="Center" Height="20" Header="thirdExpenses" VerticalAlignment="Top" Width="90" Margin="0,-1,0,0" Opacity="0" IsEnabled="False">
-                <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="137*"/>
-                        <ColumnDefinition Width="33*"/>
-                        <ColumnDefinition Width="624*"/>
-                    </Grid.ColumnDefinitions>
-                    <Button x:Name="btnTeNext" Content="Next" HorizontalAlignment="Left" Margin="561,318,0,0" VerticalAlignment="Top" Width="45" Click="btnFeNextClick" RenderTransformOrigin="0.617,0.433" Grid.Column="2"/>
-                    <Button x:Name="btnTeBack" Content="Back" HorizontalAlignment="Left" Margin="517,318,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1" Grid.Column="2"/>
-                    <Label Content="3" HorizontalAlignment="Left" Margin="123,184,0,0" VerticalAlignment="Top" Grid.Column="2"/>
+                    <Button x:Name="btnSeBack" Content="Back" HorizontalAlignment="Left" Margin="633,367,0,0" VerticalAlignment="Top" Width="39" Click="btnSeBack_Click_1"/>
+                    <ListBox x:Name="lstbxExpenses" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,31,392,166"/>
+                    <Label x:Name="lblYourExpenses" Content="Your expenses:" HorizontalAlignment="Left" Margin="125,0,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="lblMonthlyLeftover" Content="Monthly money leftover:" HorizontalAlignment="Left" Margin="24,270,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtbxMonthlyMoney" HorizontalAlignment="Left" Margin="169,274,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                 </Grid>
             </TabItem>
         </TabControl>
-        <Rectangle HorizontalAlignment="Left" Height="100" Margin="1099,257,0,0" Grid.Row="1" Stroke="Black" VerticalAlignment="Top" Width="100"/>
 
     </Grid>
 </Window>

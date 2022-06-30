@@ -36,6 +36,21 @@ namespace POE_Final_GUI
             this.Title = "Monthly Budget Calculator";
         }
 
+        //Creating the delegate
+        public delegate void exceeds(string msg);
+
+        //Checks if all expenses add up to more than 75% of user net income
+        public void ExpenseCheck()
+        {
+            double total = 0;
+            foreach (Expense e in currentExpenses)
+            {
+                total += e.GetCost();
+            }
+            exceeds del = (string msg) => MessageBox.Show(msg);
+            if (total > 0.75 * grossIn) { del.Invoke("Warning! Your monthly costs exceed 75% of your monthly income!"); }
+        }
+
         //----------Validation----------------------------------------------------------------------
 
         //Runs all validations in order and returns true if all are valid
@@ -114,7 +129,7 @@ namespace POE_Final_GUI
 
 
 
-        //--------------------------------------------------------------------------------------
+        //---------Gets info from the GUI and returns objects---------------------------------------------------------
 
         //Returns a List of expense objects relating to the basic expenses the user entered
         private List<Expense> GetBasics() 
@@ -136,12 +151,16 @@ namespace POE_Final_GUI
         {
             if (rbtnBuy.IsChecked == true)
             {
-                return new HomeLoan(
+                HomeLoan loan = new HomeLoan(
                         Convert.ToDouble(txtbxPurchasePrice.Text),
                         Convert.ToDouble(txtbxDeposit.Text),
                         Convert.ToDouble(txtbxInterestRate.Text),
                         Convert.ToDouble(txtbxMonths.Text)
                     );
+                //Checking if the loan will be approved
+                if (loan.GetCost() > (0.33 * grossIn))
+                { MessageBox.Show("Warning: Monthly repayment exceeds 1/3 of your monthly income and is unlikely to be approved!"); }
+                return loan;
             }
             else { return new Expense("Monthly Rental Cost", Convert.ToDouble(txtbxRent.Text)); }
         }
@@ -149,10 +168,16 @@ namespace POE_Final_GUI
         //Returns an expense list for car
         private Car getCar() 
         {
-            
+            return new Car(
+                txtbxModelMake.Text,
+                Convert.ToDouble(txtbxCarPrice.Text),
+                Convert.ToDouble(txtbxCarDeposit.Text),
+                Convert.ToDouble(txtbxCarRate.Text),
+                Convert.ToDouble(txtbxCarInsurance.Text)
+                ); ;
         }
 
-        //--------------------------------------------------------------------------------------
+        //-------------------GUI------------------------------------------------------------
 
         private void txtbxGrossIn_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -179,8 +204,8 @@ namespace POE_Final_GUI
 
         private void chkbxBuyCar_Checked(object sender, RoutedEventArgs e)
         {
-            if (chkbxBuyCar.IsChecked == false) { buyCarGrid.Visibility = Visibility.Hidden; }
-            else { buyCarGrid.Visibility = Visibility.Visible; }
+            if (chkbxBuyCar.IsChecked == false) { buyCarGrid.Visibility = Visibility.Hidden; txtbxModelMake.Visibility = Visibility.Hidden; }
+            else { buyCarGrid.Visibility = Visibility.Visible; txtbxModelMake.Visibility = Visibility.Visible; }
         }
 
         //The 'Next' button on the first page of the app
@@ -192,10 +217,20 @@ namespace POE_Final_GUI
             {
                 //Sets the gross input
                 grossIn = Convert.ToDouble(txtbxGrossIn.Text);
+                
+                //Adding expenses to our list
                 currentExpenses.AddRange(GetBasics());
                 currentExpenses.Add(getHousing());
                 //Only add the car expense if the user has chosen to
                 if (chkbxBuyCar.IsChecked==true) { currentExpenses.Add(getCar()); }
+
+                //Checking if all expenses exceed 75% of income
+                ExpenseCheck();
+
+                //Updating the expenses list on the summary page
+                lstbxExpenses.ItemsSource = currentExpenses.OrderByDescending(x => x.GetCost()).ToList();
+                //Performing calculations and 
+                
                 Tabs.SelectedIndex++;
             }
         }
@@ -217,8 +252,11 @@ namespace POE_Final_GUI
 
         private void btnSeBack_Click_1(object sender, RoutedEventArgs e)
         {
+            //Clears the list box displaying expenses
+            lstbxExpenses.ItemsSource=null;
+            //Clears the current expense list
             currentExpenses.Clear();
-            Tabs.SelectedIndex++;
+            Tabs.SelectedIndex--;
         }
     }
 }
