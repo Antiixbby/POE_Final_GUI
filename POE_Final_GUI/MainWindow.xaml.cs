@@ -269,7 +269,11 @@ namespace POE_Final_GUI
 
         private void btnCalcSavings_Click(object sender, RoutedEventArgs e)
         {
+            if (validateSavings()) 
+            {
+                double savings = 0;
 
+            }
         }
 
         //validates the savings info
@@ -281,10 +285,13 @@ namespace POE_Final_GUI
             if (double.TryParse(txtbxSaveAmount.Text, out savingsAmt)) { txtbxSaveAmount.Background = Brushes.White; }
             else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
             //Date
-            double amt;
-            if (double.TryParse(txtbxSaveAmount.Text, out amt)) { txtbxSaveAmount.Background = Brushes.White; }
-            else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
+            DateTime date;
+            if (DateTime.TryParse(txtbxSavingDate.Text, out date)) { txtbxSavingDate.Background = Brushes.White; }
+            else { txtbxSavingDate.Text = "Invalid value, please try again"; txtbxSavingDate.Background = Brushes.Red; return false; }
             //Interest rate
+            double rate;
+            if (double.TryParse(txtbxSavingRate.Text, out rate) && rate>-1 && rate<101) { txtbxSavingRate.Background = Brushes.White; }
+            else { txtbxSavingRate.Text = "Invalid value, please try again"; txtbxSavingRate.Background = Brushes.Red; return false; }
 
             return valid;
         }

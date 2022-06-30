@@ -74,9 +74,9 @@
                         <Label x:Name="lblInterestRate" Content="Interest rate (0.0-100):" HorizontalAlignment="Left" Margin="16,80,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.364,0.568"/>
                         <Label x:Name="lblSaveReason" Content="Reason for saving:" HorizontalAlignment="Left" Margin="36,26,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtbxSaveAmount" HorizontalAlignment="Left" Margin="154,4,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="txt" HorizontalAlignment="Left" Margin="154,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="txtbxSaveAmount_Copy1" HorizontalAlignment="Left" Margin="154,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                        <TextBox x:Name="txtbxSaveAmount_Copy2" HorizontalAlignment="Left" Margin="154,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="txtbxSavingsReason" HorizontalAlignment="Left" Margin="154,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="txtbxSavingDate" HorizontalAlignment="Left" Margin="154,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                        <TextBox x:Name="txtbxSavingRate" HorizontalAlignment="Left" Margin="154,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                         <Button x:Name="btnCalcSavings" Content="Calculate required monthly savings" HorizontalAlignment="Left" Margin="119,123,0,0" VerticalAlignment="Top" Click="btnCalcSavings_Click"/>
                         <Label x:Name="lblSavingsAns" Content="Required monthly savings:" HorizontalAlignment="Left" Margin="0,155,0,0" VerticalAlignment="Top"/>
                         <TextBox x:Name="txtbxReqSavings" HorizontalAlignment="Left" Margin="154,159,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
