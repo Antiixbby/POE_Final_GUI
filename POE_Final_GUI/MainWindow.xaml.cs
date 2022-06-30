@@ -81,9 +81,9 @@ namespace POE_Final_GUI
             //Validating buttons
             if (!validateButtons()) { valid = false; }
             //Validating basics
-            //if () { }
+            if (!validateBasics()) { valid = false; }
             //Validating housing
-            //if () { }
+            if (!validateHousing()) { valid = false; }
             //Validating car
             //if(){}
             return valid;
@@ -97,6 +97,48 @@ namespace POE_Final_GUI
             //If the user has not selected buy or rent
             if (rbtnBuy.IsChecked == false && rbtnRent.IsChecked == false) { MessageBox.Show("Please select either Buying or Renting"); return false; }
             return true;
+        }
+
+        //Validates the types for all values entered for income, tax and basic expenses like groceries
+        private bool validateBasics()
+        {
+            //Validation for just for the gross in
+            try { double z = double.Parse(txtbxGrossIn.Text); txtbxGrossIn.Background = Brushes.White; }
+            catch (Exception e) { Console.WriteLine(e); txtbxGrossIn.Text = "Enter a valid value"; txtbxGrossIn.Background = Brushes.Red; return false; }
+
+            //Different textboxes are grouped into grids depending on their function, we then iterate through the children of these grids for validation
+            //Validation for basic expenses such as 
+            foreach (TextBox t in basicExpensestxtbxgrp.Children)
+            {
+                try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
+                catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
+            }
+            return true;
+        }
+        //Validates user input for housing info
+        private bool validateHousing() 
+        {
+            if (rbtnBuy.IsChecked == true)
+            {
+                foreach (TextBox t in homeloanGrid.Children)
+                {
+                    try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
+                    catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
+                }
+                return true;
+            }
+            //If not buying must be renting as we have validated that at least one button is checked
+            else 
+            {
+                try { double z = double.Parse(txtbxRent.Text); txtbxRent.Background = Brushes.White; }
+                catch (Exception e) { Console.WriteLine(e); txtbxRent.Text = "Enter a valid value"; txtbxRent.Background = Brushes.Red; return false; }
+                return true;
+            }
+        }
+        //Validates user input for car
+        private bool validateCar() 
+        {
+            
         }
 
         private void txtbxGrossIn_TextChanged(object sender, TextChangedEventArgs e)
@@ -114,21 +156,7 @@ namespace POE_Final_GUI
             return list;
         }
 
-        //Validates the types for all values entered for income, tax and basic expenses like groceries
-        private bool validateInput(ArrayList list) 
-        {
-            //Validation for just for the gross in
-            try { double z = double.Parse(txtbxGrossIn.Text); txtbxGrossIn.Background = Brushes.White; }
-            catch (Exception e) { Console.WriteLine(e); txtbxGrossIn.Text = "Enter a valid value" ; txtbxGrossIn.Background = Brushes.Red; return false; }
-            
-            //Different textboxes are grouped into grids depending on their function, we then iterate through the children of these grids for validation
-            //Validation for basic expenses such as 
-            foreach (TextBox t in basicExpensestxtbxgrp.Children){
-                try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
-                catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
-            }
-            return true;
-        }
+      
 
         private void txtbxOther_TextChanged(object sender, TextChangedEventArgs e)
         {
