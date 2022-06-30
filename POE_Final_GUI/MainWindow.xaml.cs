@@ -126,19 +126,41 @@ namespace POE_Final_GUI
             }
         }
         //Validates user input for car
-        private bool validateCar() 
+        private bool validateCar()
         {
-            if (chkbxBuyCar.IsChecked==true) {
+            if (chkbxBuyCar.IsChecked == true) {
                 foreach (TextBox t in buyCarGrid.Children.OfType<TextBox>())
                 {
                     try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
                     catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
                 }
+                if (Convert.ToDouble(txtbxCarRate.Text) > 100 || Convert.ToDouble(txtbxCarRate.Text) < 0)
+                { txtbxCarRate.Text = "Enter a valid value"; txtbxCarRate.Background = Brushes.Red; return false; }
+                else { txtbxCarRate.Background = Brushes.White; }
                 return true;
             }
             return true;
         }
 
+        //validates the savings info
+        private bool validateSavings()
+        {
+            bool valid = true;
+            //Savings amount
+            double savingsAmt;
+            if (double.TryParse(txtbxSaveAmount.Text, out savingsAmt)) { txtbxSaveAmount.Background = Brushes.White; }
+            else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
+            //Date
+            DateTime date;
+            if (DateTime.TryParse(txtbxSavingDate.Text, out date)) { txtbxSavingDate.Background = Brushes.White; }
+            else { txtbxSavingDate.Text = "Invalid value, please try again"; txtbxSavingDate.Background = Brushes.Red; return false; }
+            //Interest rate
+            double rate;
+            if (double.TryParse(txtbxSavingRate.Text, out rate) && rate > -1 && rate < 101) { txtbxSavingRate.Background = Brushes.White; }
+            else { txtbxSavingRate.Text = "Invalid value, please try again"; txtbxSavingRate.Background = Brushes.Red; return false; }
+
+            return valid;
+        }
 
 
         //---------Gets info from the GUI and returns objects---------------------------------------------------------
@@ -166,7 +188,7 @@ namespace POE_Final_GUI
                 HomeLoan loan = new HomeLoan(
                         Convert.ToDouble(txtbxPurchasePrice.Text),
                         Convert.ToDouble(txtbxDeposit.Text),
-                        Convert.ToDouble(txtbxInterestRate.Text),
+                        Convert.ToDouble(txtbxInterestRate.Text)/100,
                         Convert.ToDouble(txtbxMonths.Text)
                     );
                 //Checking if the loan will be approved
@@ -184,7 +206,7 @@ namespace POE_Final_GUI
                 txtbxModelMake.Text,
                 Convert.ToDouble(txtbxCarPrice.Text),
                 Convert.ToDouble(txtbxCarDeposit.Text),
-                Convert.ToDouble(txtbxCarRate.Text),
+                Convert.ToDouble(txtbxCarRate.Text)/100,
                 Convert.ToDouble(txtbxCarInsurance.Text)
                 ); ;
         }
@@ -301,24 +323,6 @@ namespace POE_Final_GUI
             }
         }
 
-        //validates the savings info
-        private bool validateSavings() 
-        {
-            bool valid = true;
-            //Savings amount
-            double savingsAmt;
-            if (double.TryParse(txtbxSaveAmount.Text, out savingsAmt)) { txtbxSaveAmount.Background = Brushes.White; }
-            else { txtbxSaveAmount.Text = "Invalid value, please try again"; txtbxSaveAmount.Background = Brushes.Red; return false; }
-            //Date
-            DateTime date;
-            if (DateTime.TryParse(txtbxSavingDate.Text, out date)) { txtbxSavingDate.Background = Brushes.White; }
-            else { txtbxSavingDate.Text = "Invalid value, please try again"; txtbxSavingDate.Background = Brushes.Red; return false; }
-            //Interest rate
-            double rate;
-            if (double.TryParse(txtbxSavingRate.Text, out rate) && rate>-1 && rate<101) { txtbxSavingRate.Background = Brushes.White; }
-            else { txtbxSavingRate.Text = "Invalid value, please try again"; txtbxSavingRate.Background = Brushes.Red; return false; }
-
-            return valid;
-        }
+        
     }
 }
