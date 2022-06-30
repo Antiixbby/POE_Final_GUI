@@ -26,6 +26,7 @@ namespace POE_Final_GUI
         List<Expense> currentExpenses = new List<Expense>();
         string[] expenseNames = { "Estimated Monthly Tax Deducted", "Groceries", "Water and Lights", "Travel cost (Including petrol)", "Cellphone and Telephone", "Other expenses" };
         double grossIn = 0;
+        Calculation calc = new Calculation();
         //--------------------------------------------------------------------
 
         public MainWindow()
@@ -231,8 +232,9 @@ namespace POE_Final_GUI
 
                 //Updating the expenses list on the summary page
                 lstbxExpenses.ItemsSource = currentExpenses.OrderByDescending(x => x.GetCost()).ToList();
-                //Performing calculations and 
-                
+                //Performing calculations and setting monthly money leftover
+                txtbxMonthlyMoney.Text = calc.CalculateMonthlyMoneyLeftover(grossIn, currentExpenses)+"";
+                //Takes us to the next page
                 Tabs.SelectedIndex++;
             }
         }
@@ -271,8 +273,14 @@ namespace POE_Final_GUI
         {
             if (validateSavings()) 
             {
-                double savings = 0;
-
+                //Number of months to save
+                double savingAmount = Convert.ToDouble(txtbxSaveAmount.Text);
+                double months = (((Convert.ToDateTime(txtbxSavingDate.Text).Year - DateTime.Now.Year) * 12) + Convert.ToDateTime(txtbxSavingDate.Text).Month - DateTime.Now.Month);
+                double years = Convert.ToDateTime(txtbxSavingDate.Text).Year - DateTime.Now.Year;
+                double rate = Convert.ToDouble(txtbxSavingRate.Text) / 100;
+                
+                double ans = Math.Floor((savingAmount * (rate / 12)) / (Math.Pow((1 + (rate / 12)), 12 * years) - 1));
+                txtbxReqSavings.Text = ans+"";
             }
         }
 
