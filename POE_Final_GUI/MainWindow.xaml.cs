@@ -36,6 +36,7 @@ namespace POE_Final_GUI
             this.Title = "Monthly Budget Calculator";
         }
 
+
         //Creating the delegate
         public delegate void exceeds(string msg);
 
@@ -257,6 +258,11 @@ namespace POE_Final_GUI
             //Clears the current expense list
             currentExpenses.Clear();
             Tabs.SelectedIndex--;
+        }
+
+        private void chkbxSaveUp_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
