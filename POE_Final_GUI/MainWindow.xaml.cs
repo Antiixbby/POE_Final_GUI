@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Collections;
+using POE_Final_GUI.Expenses;
 
 namespace POE_Final_GUI
 {
@@ -35,47 +36,10 @@ namespace POE_Final_GUI
             this.Title = "Monthly Budget Calculator";
         }
 
-        private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            
-        }
-
-        private void btnSeBack_Click(object sender, RoutedEventArgs e)
-        {
-            prevTab();
-        }
-
-        //Moves to the next tab
-        private void nextTab()
-        {
-            Tabs.SelectedIndex = Tabs.SelectedIndex + 1;
-        }
-
-        private void prevTab()
-        {
-            Tabs.SelectedIndex = Tabs.SelectedIndex - 1;
-        }
-
-        private void btnSeNex_Click(object sender, RoutedEventArgs e)
-        {
-            nextTab();
-        }
-
-        private void btnSeBack_Click_1(object sender, RoutedEventArgs e)
-        {
-            currentExpenses.Clear();
-            prevTab();
-        }
-
-        //The 'Next' button on the first page of the app
-        //This method is responsible for 
-        private void btnFeNextClick(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        //----------Validation----------------------------------------------------------------------
 
         //Runs all validations in order and returns true if all are valid
-        bool allValid() 
+        bool allValid()
         {
             bool valid = true;
             //Validating buttons
@@ -85,11 +49,10 @@ namespace POE_Final_GUI
             //Validating housing
             if (!validateHousing()) { valid = false; }
             //Validating car
-            //if(){}
+            if (!validateCar()) { valid = false; }
             return valid;
         }
 
-        //Validates all values for basic expenses such as 
 
         //Validates that the user has made valid selections and the app can continue
         private bool validateButtons() 
@@ -138,25 +101,63 @@ namespace POE_Final_GUI
         //Validates user input for car
         private bool validateCar() 
         {
+            if (chkbxBuyCar.IsChecked==true) {
+                foreach (TextBox t in buyCarGrid.Children.OfType<TextBox>())
+                {
+                    try { double x = double.Parse(t.Text); t.Background = Brushes.White; }
+                    catch (FormatException format) { Console.WriteLine(format); t.Text = "Enter a valid value"; t.Background = Brushes.Red; return false; }
+                }
+                return true;
+            }
+            return true;
+        }
+
+
+
+        //--------------------------------------------------------------------------------------
+
+        //Returns a List of expense objects relating to the basic expenses the user entered
+        private List<Expense> GetBasics() 
+        {
+            ArrayList values = new ArrayList();
+            foreach (TextBox t in basicExpensestxtbxgrp.Children) {values.Add(t.Text);}
+            List<Expense> returnList = new List<Expense>();
+            //Creates a new expense object and adds it to the expense list for each basic expense
+            for (int i = 0; i < expenseNames.Length; i++) 
+            {
+                //We only call this method after validating that all data in basicExpensestxtbxgrp is of type double
+                returnList.Add(new Expense(expenseNames[i], Convert.ToDouble(values[i])));
+            }
+            return returnList;
+        }
+
+        //Returns a homeloan expense from user data
+        private Expense getHousing() 
+        {
+            if (rbtnBuy.IsChecked == true)
+            {
+                return new HomeLoan(
+                        Convert.ToDouble(txtbxPurchasePrice.Text),
+                        Convert.ToDouble(txtbxDeposit.Text),
+                        Convert.ToDouble(txtbxInterestRate.Text),
+                        Convert.ToDouble(txtbxMonths.Text)
+                    );
+            }
+            else { return new Expense("Monthly Rental Cost", Convert.ToDouble(txtbxRent.Text)); }
+        }
+
+        //Returns an expense list for car
+        private Car getCar() 
+        {
             
         }
+
+        //--------------------------------------------------------------------------------------
 
         private void txtbxGrossIn_TextChanged(object sender, TextChangedEventArgs e)
         {
 
         }
-
-        //--------------------------------------------------------------------------------------
-
-        //Returns an array list of all values entered for basic expenses
-        public ArrayList GetBasics() 
-        {
-            ArrayList list = new ArrayList();
-            foreach (TextBox t in basicExpensestxtbxgrp.Children) {list.Add(t.Text);}
-            return list;
-        }
-
-      
 
         private void txtbxOther_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -182,6 +183,42 @@ namespace POE_Final_GUI
             else { buyCarGrid.Visibility = Visibility.Visible; }
         }
 
-        private void toggleBuyCar(bool toggle) {  }
+        //The 'Next' button on the first page of the app
+        //This method is responsible for 
+        private void btnFeNextClick(object sender, RoutedEventArgs e)
+        {
+            //If all user given input is valid
+            if (allValid())
+            {
+                //Sets the gross input
+                grossIn = Convert.ToDouble(txtbxGrossIn.Text);
+                currentExpenses.AddRange(GetBasics());
+                currentExpenses.Add(getHousing());
+                //Only add the car expense if the user has chosen to
+                if (chkbxBuyCar.IsChecked==true) { currentExpenses.Add(getCar()); }
+                Tabs.SelectedIndex++;
+            }
+        }
+
+        private void Tabs_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void btnSeBack_Click(object sender, RoutedEventArgs e)
+        {
+            Tabs.SelectedIndex--;
+        }
+
+        private void btnSeNex_Click(object sender, RoutedEventArgs e)
+        {
+            Tabs.SelectedIndex++;
+        }
+
+        private void btnSeBack_Click_1(object sender, RoutedEventArgs e)
+        {
+            currentExpenses.Clear();
+            Tabs.SelectedIndex++;
+        }
     }
 }
