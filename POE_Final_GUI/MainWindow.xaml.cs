@@ -278,9 +278,20 @@ namespace POE_Final_GUI
                 double months = (((Convert.ToDateTime(txtbxSavingDate.Text).Year - DateTime.Now.Year) * 12) + Convert.ToDateTime(txtbxSavingDate.Text).Month - DateTime.Now.Month);
                 double years = Convert.ToDateTime(txtbxSavingDate.Text).Year - DateTime.Now.Year;
                 double rate = Convert.ToDouble(txtbxSavingRate.Text) / 100;
-                
-                double ans = Math.Floor((savingAmount * (rate / 12)) / (Math.Pow((1 + (rate / 12)), 12 * years) - 1));
+                //Calculation
+                double ans = Math.Floor((savingAmount * (rate / months)) / (Math.Pow((1 + (rate / months)), months * years) - 1));
                 txtbxReqSavings.Text = ans+"";
+                //Removing it from the list if its already there
+                Expense savings = new Expense("Monthly Savings", ans);
+                foreach (Expense searchExpense in currentExpenses) {
+                    if (searchExpense.getName() == "Monthly ") 
+                    {
+                        currentExpenses.Remove(searchExpense);
+                    }    
+                }
+                //Adding it to our expenses
+                currentExpenses.Add(savings);
+                lstbxExpenses.ItemsSource = currentExpenses.OrderByDescending(x => x.GetCost()).ToList();
             }
         }
 

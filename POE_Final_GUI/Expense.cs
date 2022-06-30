@@ -29,6 +29,11 @@ namespace POE_Final_GUI
             this.cost = cost;
         }
 
+        public string getName() 
+        {
+            return this.name;
+        }
+
 
         public override string ToString()
         {
